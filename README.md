@@ -37,7 +37,7 @@ You can support the maintainer of this project through the links below
 
 ## Disclaimer
 
-This project is not affiliated, associated, authorized, endorsed by, or in any way officially connected with Instagram or any of its subsidiaries or its affiliates. The official Instagram website can be found at https://instagram.com. "Instagram" as well as related names, marks, emblems and images are registered trademarks of their respective owners.
+This project is not affiliated, associated, authorized, endorsed by, or in any way officially connected with Riot Games or any of its subsidiaries or its affiliates. The official Riot Games website can be found at https://developer.riotgames.com/. "Riot Games" as well as related names, marks, emblems and images are registered trademarks of their respective owners.
 
 ## License
 
