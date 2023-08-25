@@ -24,6 +24,9 @@ App.use((req, res, next) => {
 import Champion from './routers/ChampionRouter.js'
 App.use('/api/v1/champions/', Champion)
 
+import Skin from './routers/SkinRouter.js'
+App.use('/api/v1/skins/', Skin)
+
 export {
   App
 };

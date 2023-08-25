@@ -1,4 +1,4 @@
-import { getChampionByName, getChampionInfoByName } from "../api/Champion.js"
+import { getChampionByName, getChampionInfoByName } from "../api/champion.js"
 import { firstToUperCase } from "../helpers/String.js";
 import { internalError, levelError, noChampionFound, noParams } from "../models/Index.js"
 
