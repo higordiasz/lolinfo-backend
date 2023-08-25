@@ -11,7 +11,7 @@ A implementation of [Riot Games](https://developer.riotgames.com/) API.
 * [Discord](https://discord.gg/PJekRSanZb)
 * [GitHub](https://github.com/higordiasz/lolinfo-backend)
 
-## Example usage
+## Endpoints
 
 ```js
  // Comming soon
@@ -22,6 +22,8 @@ A implementation of [Riot Games](https://developer.riotgames.com/) API.
 | Functions  | Status | Description |
 | ------------- | ------------- | ------------- |
 | Hello | ✅  | A simple Hello World |
+|Champ Info| ✅ | Get Champions information by name|
+|Level Info| ✅ | Get Chapion stats per level|
 
 Something missing? Make an issue and let us know!
 
