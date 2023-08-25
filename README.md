@@ -1,4 +1,4 @@
-# Unofficial InstaAPI
+# League of Legends Info - Backend
 
 It was created for educational purposes only.
 
