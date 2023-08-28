@@ -1,13 +1,13 @@
 import { firstToUperCase } from "../helpers/String.js";
-import { internalError, noChampionFound } from "../models/ErrorModel.js";
+import { internalError, noChampionFound, noParams } from "../models/ErrorModel.js";
+import { getChampionSkins } from '../api/Skin.js'
 
 
 async function getChampionSkinList(req, res, next) {
   try {
-    if (!req.params) return noParams(res);
-    const skins = await getChampionSkinList(firstToUperCase(req.params.skin))
+    if (!req.params.skin) return noParams(req);
+    const skins = await getChampionSkins(firstToUperCase(req.params.skin))
     if (!skins) return noChampionFound(res);
-    console.log('oi')
     return res.status(200).send({
       status: 200,
       message: [
@@ -16,7 +16,6 @@ async function getChampionSkinList(req, res, next) {
       eror: ''
     });
   } catch (err) {
-    console.log(err)
     return internalError(res);
   }
 }
