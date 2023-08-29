@@ -1,9 +1,11 @@
 import { championPopulation } from '../helpers/ChampionPopulation.js';
 import { noChampionFound } from '../models/Index.js';
-const baseUrl = "http://ddragon.leagueoflegends.com/cdn/13.16.1/data/en_US/champion/";
+function baseUrl(version, region) {
+  return `http://ddragon.leagueoflegends.com/cdn/${version}/data/${region}/champion/`
+}
 
-async function getChampionInfoByName(name) {
-  const champ = await fetch(baseUrl + name + '.json')
+async function getChampionInfoByName(name, version, region) {
+  const champ = await fetch(baseUrl(version, region) + name + '.json')
     .then(function (res) {
       return res.json();
     })
@@ -14,8 +16,8 @@ async function getChampionInfoByName(name) {
   return championPopulation(champ.data[name]);
 }
 
-async function getChampionByName(res, name) {
-  const champ = await fetch(baseUrl + name + '.json')
+async function getChampionByName(res, name, version, region) {
+  const champ = await fetch(baseUrl(version, region) + name + '.json')
     .then(function (res) {
       return res.json();
     })

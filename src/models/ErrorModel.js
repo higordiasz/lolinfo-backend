@@ -22,6 +22,22 @@ async function noParams(res) {
   });
 }
 
+async function noRegion(res) {
+  return res.status(404).send({
+    status: 404,
+    message: [],
+    error: 'No region information'
+  });
+}
+
+async function noVersion(res) {
+  return res.status(404).send({
+    status: 404,
+    message: [],
+    error: 'No region information'
+  });
+}
+
 async function noQuery(res) {
   return res.status(404).send({
     status: 404,
@@ -46,11 +62,49 @@ async function levelError(res) {
   })
 }
 
+async function noValidRegion(res) {
+  return res.status(404).send({
+    status: 404,
+    message: [],
+    error: 'This region is not a valid region'
+  })
+}
+
+async function noValidVersion(res) {
+  return res.status(404).send({
+    status: 404,
+    message: [],
+    error: 'This version is not a valid version'
+  })
+}
+
+async function noServerInformation(res) {
+  return res.status(404).send({
+    status: 404,
+    message: [],
+    error: 'No have information of server'
+  })
+}
+
+async function noServerResponse(res) {
+  return res.status(404).send({
+    status: 404,
+    message: [],
+    error: 'No server response'
+  })
+}
+
 export {
   noAuthentication,
   noChampionFound,
   noParams,
   noQuery,
   internalError,
-  levelError
+  levelError,
+  noRegion,
+  noVersion,
+  noValidRegion,
+  noValidVersion,
+  noServerInformation,
+  noServerResponse
 }

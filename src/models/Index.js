@@ -4,7 +4,13 @@ import {
   noParams,
   noQuery,
   internalError,
-  levelError
+  levelError,
+  noRegion,
+  noVersion,
+  noValidRegion,
+  noValidVersion,
+  noServerInformation,
+  noServerResponse
 } from './ErrorModel.js';
 
 export {
@@ -13,6 +19,11 @@ export {
   noParams,
   noQuery,
   internalError,
-  levelError
-
+  levelError,
+  noRegion,
+  noVersion,
+  noValidRegion,
+  noValidVersion,
+  noServerInformation,
+  noServerResponse
 }

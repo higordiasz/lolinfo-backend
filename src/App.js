@@ -22,10 +22,13 @@ App.use((req, res, next) => {
 
 // ROUTERS
 import Champion from './routers/ChampionRouter.js'
-App.use('/api/v1/champions/', Champion)
+App.use(`/api/${process.env.APIVERSION}/champions/`, Champion)
 
 import Skin from './routers/SkinRouter.js'
-App.use('/api/v1/skins/', Skin)
+App.use(`/api/${process.env.APIVERSION}/skins`, Skin)
+
+import Information from './routers/InformationRouter.js'
+App.use(`/api/${process.env.APIVERSION}/info/`, Information)
 
 export {
   App

@@ -1,11 +1,16 @@
 import { getChampionByName, getChampionInfoByName } from "../api/champion.js"
+import { isValidLanguage, isValidVersion } from "../helpers/Check.js";
 import { firstToUperCase } from "../helpers/String.js";
-import { internalError, levelError, noChampionFound, noParams } from "../models/Index.js"
+import { internalError, levelError, noChampionFound, noParams, noRegion, noValidRegion, noValidVersion, noVersion } from "../models/Index.js"
 
 async function getChampion(req, res, next) {
   try {
+    if (!req.query.region) return noRegion(res);
+    if (!isValidLanguage(req.query.region)) return noValidRegion(res);
+    if (!req.query.version) return noVersion(res);
+    if (!await isValidVersion(req.query.version)) return noValidVersion(res);
     if (!req.params.champion) return noParams(res);
-    return getChampionByName(res, firstToUperCase(req.params.champion));
+    return getChampionByName(res, firstToUperCase(req.params.champion), req.query.version, req.query.region);
   } catch {
     return internalError(res);
   }
@@ -13,11 +18,15 @@ async function getChampion(req, res, next) {
 
 async function getChampionLevelStats(req, res, next) {
   try {
+    if (!req.query.region) return noRegion(res);
+    if (!isValidLanguage(req.query.region)) return noValidRegion(res);
+    if (!req.query.version) return noVersion(res);
+    if (!await isValidVersion(req.query.version)) return noValidVersion(res);
     if (!req.params.champion) return noParams(res);
     if (!req.params.level) return noParams(res);
     if (isNaN(req.params.level)) return levelError(res);
     if (req.params.level < 1 || req.params.level > 18) return levelError(res);
-    const champ = await getChampionInfoByName(firstToUperCase(req.params.champion));
+    const champ = await getChampionInfoByName(firstToUperCase(req.params.champion), req.query.version, req.query.region);
     if (!champ) return noChampionFound(res);
     return res.status(200).send({
       status: 200,
