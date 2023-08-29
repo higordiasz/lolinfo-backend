@@ -30,6 +30,9 @@ App.use(`/api/${process.env.APIVERSION}/skins`, Skin)
 import Information from './routers/InformationRouter.js'
 App.use(`/api/${process.env.APIVERSION}/info/`, Information)
 
+import Items from './routers/ItemsRouter.js'
+App.use(`/api/${process.env.APIVERSION}/items/`, Items)
+
 export {
   App
 };
