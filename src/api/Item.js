@@ -37,7 +37,24 @@ async function getSingleItem(res, version, region, item) {
   });
 }
 
+async function getListStats(res, version, region) {
+  const items = await fetch(baseUrl(version, region))
+    .then(function (res) {
+      return res.json();
+    })
+    .catch(function () {
+      return
+    });
+  if (!items) return noServerResponse(res);
+  return res.status(200).send({
+    status: 200,
+    message: items.basic.stats,
+    error: ''
+  });
+}
+
 export {
   getItemsList,
-  getSingleItem
+  getSingleItem,
+  getListStats
 }
