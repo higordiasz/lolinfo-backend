@@ -94,6 +94,30 @@ async function noServerResponse(res) {
   })
 }
 
+async function noBody(res) {
+  return res.status(404).send({
+    status: 404,
+    message: [],
+    error: 'No body found'
+  })
+}
+
+async function invalidRequest(res) {
+  return res.status(404).send({
+    status: 404,
+    message: [],
+    error: 'Invalid request, review informations'
+  })
+}
+
+async function noItemFound(res) {
+  return res.status(404).send({
+    status: 404,
+    message: [],
+    error: 'No found item'
+  })
+}
+
 export {
   noAuthentication,
   noChampionFound,
@@ -106,5 +130,8 @@ export {
   noValidRegion,
   noValidVersion,
   noServerInformation,
-  noServerResponse
+  noServerResponse,
+  noBody,
+  invalidRequest,
+  noItemFound
 }

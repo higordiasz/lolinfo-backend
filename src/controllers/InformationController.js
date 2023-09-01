@@ -2,7 +2,7 @@ import { getServerInformation } from "../api/LolServer.js";
 import { getAllVersions } from "../api/Version.js";
 import { languages } from "../helpers/Check.js";
 import { isValidServer, servers } from "../helpers/ServerRegion.js";
-import { internalError, noParams, noServerInformation } from "../models/ErrorModel.js"
+import { internalError, noParams, noServerInformation } from "../models/Index.js"
 
 async function serversInfo(req, res, next) {
   try {

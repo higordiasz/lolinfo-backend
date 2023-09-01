@@ -1,6 +1,6 @@
 import { championPopulation } from '../helpers/ChampionPopulation.js';
-import { itemPopulation, singleItemPopulation } from '../helpers/ItemPopulation.js';
-import { noServerResponse } from '../models/Index.js';
+import { itemKeyPopulation, itemPopulation, singleItemPopulation } from '../helpers/ItemPopulation.js';
+import { noItemFound, noServerResponse } from '../models/Index.js';
 function baseUrl(version, region) {
   return `http://ddragon.leagueoflegends.com/cdn/${version}/data/${region}/item.json`
 }
@@ -30,6 +30,8 @@ async function getSingleItem(res, version, region, item) {
       return
     });
   if (!items) return noServerResponse(res);
+  let keys = itemKeyPopulation(items.data);
+  if (!keys.includes(item)) return noItemFound(res);
   return res.status(200).send({
     status: 200,
     message: singleItemPopulation(items.data, item),
@@ -53,8 +55,29 @@ async function getListStats(res, version, region) {
   });
 }
 
+async function checkValidItems(items, version, region) {
+  if (!Array.isArray(items)) return false;
+  const itemsListAPI = await fetch(baseUrl(version, region))
+    .then(function (res) {
+      return res.json();
+    })
+    .catch(function () {
+      return
+    });
+  if (!itemsListAPI) return false;
+  let keys = itemKeyPopulation(itemsListAPI.data);
+  let valid = true;
+  items.forEach(item => {
+    if (!keys.includes(`${item}`)) {
+      valid = false;
+    }
+  })
+  return valid;
+}
+
 export {
   getItemsList,
   getSingleItem,
-  getListStats
+  getListStats,
+  checkValidItems
 }

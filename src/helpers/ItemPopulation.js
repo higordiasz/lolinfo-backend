@@ -46,7 +46,19 @@ function singleItemPopulation(itemList, item) {
   return ret;
 }
 
+function itemKeyPopulation(itemList) {
+  let ret = [];
+  let keys = Object.keys(itemList);
+  keys.forEach(key => {
+    if (itemList[key].maps['11']) {
+      ret.push(key)
+    }
+  })
+  return ret;
+}
+
 export {
   itemPopulation,
-  singleItemPopulation
+  singleItemPopulation,
+  itemKeyPopulation
 }

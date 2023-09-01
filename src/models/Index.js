@@ -10,8 +10,17 @@ import {
   noValidRegion,
   noValidVersion,
   noServerInformation,
-  noServerResponse
+  noServerResponse,
+  noBody,
+  invalidRequest,
+  noItemFound
 } from './ErrorModel.js';
+
+import {
+  toManyItems,
+  invalidItem
+} from './BuildErrors.js'
+
 
 export {
   noAuthentication,
@@ -25,5 +34,10 @@ export {
   noValidRegion,
   noValidVersion,
   noServerInformation,
-  noServerResponse
+  noServerResponse,
+  noBody,
+  invalidRequest,
+  toManyItems,
+  invalidItem,
+  noItemFound
 }

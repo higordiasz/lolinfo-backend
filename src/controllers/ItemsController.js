@@ -1,6 +1,6 @@
 import { getItemsList, getListStats, getSingleItem } from "../api/Item.js";
 import { isValidLanguage, isValidVersion } from "../helpers/Check.js";
-import { internalError, noParams, noValidRegion, noValidVersion } from "../models/ErrorModel.js"
+import { internalError, noParams, noValidRegion, noValidVersion } from "../models/Index.js"
 
 async function itemList(req, res, next) {
   try {

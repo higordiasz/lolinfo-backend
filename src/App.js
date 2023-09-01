@@ -33,6 +33,9 @@ App.use(`/api/${process.env.APIVERSION}/info/`, Information)
 import Items from './routers/ItemsRouter.js'
 App.use(`/api/${process.env.APIVERSION}/items/`, Items)
 
+import Build from './routers/BuildRouter.js'
+App.use(`/api/${process.env.APIVERSION}/build/`, Build);
+
 export {
   App
 };

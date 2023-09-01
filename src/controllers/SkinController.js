@@ -1,5 +1,5 @@
 import { firstToUperCase } from "../helpers/String.js";
-import { internalError, noChampionFound, noParams, noRegion, noValidRegion, noValidVersion, noVersion } from "../models/ErrorModel.js";
+import { internalError, noChampionFound, noParams, noRegion, noValidRegion, noValidVersion, noVersion } from "../models/Index.js";
 import { getChampionSkins } from '../api/Skin.js'
 import { isValidLanguage, isValidVersion } from "../helpers/Check.js";
 
