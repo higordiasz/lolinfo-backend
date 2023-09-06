@@ -1,5 +1,5 @@
 import { getChampionInfoByName } from "../api/Champion.js";
-import { checkValidItems } from "../api/Item.js";
+import { checkValidItems, getSingleItem, getSingleItemInfo } from "../api/Item.js";
 import { isValidLanguage, isValidVersion } from "../helpers/Check.js";
 import { firstToUperCase } from "../helpers/String.js";
 import { invalidItem, invalidRequest, noBody, noChampionFound, noParams, noRegion, noValidRegion, noValidVersion, noVersion, toManyItems } from "../models/Index.js";
@@ -20,9 +20,15 @@ async function getBuildStats(req, res, next) {
   if (build.items.length > 6 || build.items.length < 0) return toManyItems(res);
   if (build.items.length > 0)
     if (!await checkValidItems(build.items, req.query.version, req.query.region)) return invalidItem(res);
+  let itemsInfo = [];
+  for (let i = 0; i < build.items.length; i++) {
+    let info = await getSingleItemInfo(req.query.version, req.query.region, build.items[i]);
+    if (info.length > 0)
+      itemsInfo.push(info[0])
+  }
   return res.status(200).send({
     status: 200,
-    message: [],
+    message: itemsInfo,
     error: ''
   });
 }

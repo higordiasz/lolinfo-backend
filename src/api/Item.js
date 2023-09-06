@@ -75,9 +75,24 @@ async function checkValidItems(items, version, region) {
   return valid;
 }
 
+async function getSingleItemInfo(version, region, item) {
+  const items = await fetch(baseUrl(version, region))
+    .then(function (res) {
+      return res.json();
+    })
+    .catch(function () {
+      return
+    });
+  if (!items) return [];
+  let keys = itemKeyPopulation(items.data);
+  if (!keys.includes(`${item}`)) return [];
+  return singleItemPopulation(items.data, `${item}`);
+}
+
 export {
   getItemsList,
   getSingleItem,
   getListStats,
-  checkValidItems
+  checkValidItems,
+  getSingleItemInfo
 }
