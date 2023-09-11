@@ -1,5 +1,6 @@
 import { getChampionInfoByName } from "../api/Champion.js";
 import { checkValidItems, getSingleItem, getSingleItemInfo } from "../api/Item.js";
+import { statsCalculator } from "../helpers/Builder.js";
 import { isValidLanguage, isValidVersion } from "../helpers/Check.js";
 import { firstToUperCase } from "../helpers/String.js";
 import { invalidItem, invalidRequest, noBody, noChampionFound, noParams, noRegion, noValidRegion, noValidVersion, noVersion, toManyItems } from "../models/Index.js";
@@ -26,6 +27,7 @@ async function getBuildStats(req, res, next) {
     if (info.length > 0)
       itemsInfo.push(info[0])
   }
+  let calculation = statsCalculator(champion, itemsInfo)
   return res.status(200).send({
     status: 200,
     message: itemsInfo,

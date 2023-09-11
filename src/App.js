@@ -10,6 +10,7 @@ App.use(bodyParser.urlencoded({
   extended: true
 }));
 
+/*
 // Force HTTPS
 App.use((req, res, next) => {
   if ((req.headers["x-forwarded-proto"] || "").endsWith("http"))
@@ -17,7 +18,7 @@ App.use((req, res, next) => {
   else
     next();
 });
-
+*/
 // ROUTERS
 import Champion from './routers/ChampionRouter.js'
 App.use(`/api/${APIVERSION}/champions/`, Champion)
