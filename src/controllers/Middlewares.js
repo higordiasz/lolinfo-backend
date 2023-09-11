@@ -1,7 +1,8 @@
 import { noAuthentication } from '../models/Index.js'
 
 async function checkToken(req, res, next) {
-  if (req.headers["token"] != process.env.APITOKEN) return noAuthentication(res);
+  const token = process.env.APITOKEN || "lolinfo";
+  if (req.headers["token"] != token) return noAuthentication(res);
   return next();
 }
 

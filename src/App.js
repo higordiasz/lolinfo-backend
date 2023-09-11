@@ -10,15 +10,13 @@ App.use(bodyParser.urlencoded({
   extended: true
 }));
 
-/*
-// USE HTTPS
+
 App.use((req, res, next) => {
   if ((req.headers["x-forwarded-proto"] || "").endsWith("http"))
     res.redirect(`https://${req.headers.host}${req.url}`);
   else
     next();
 });
-*/
 
 // ROUTERS
 import Champion from './routers/ChampionRouter.js'
