@@ -231,3 +231,7 @@ class StatsCalculation {
     if (!champion.stats) return null;
   }
 }
+
+export {
+  StatsCalculation
+}
