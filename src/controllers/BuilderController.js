@@ -1,6 +1,5 @@
 import { getChampionInfoByName } from "../api/Champion.js";
 import { checkValidItems, getSingleItem, getSingleItemInfo } from "../api/Item.js";
-import { statsCalculator } from "../helpers/Builder.js";
 import { isValidLanguage, isValidVersion } from "../helpers/Check.js";
 import { firstToUperCase } from "../helpers/String.js";
 import { StatsCalculation } from "../models/Calculation.js";
