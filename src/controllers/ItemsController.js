@@ -1,6 +1,6 @@
 import { getItemsList, getListStats, getSingleItem } from "../api/Item.js";
 import { isValidLanguage, isValidVersion } from "../helpers/Check.js";
-import { internalError, noParams, noValidRegion, noValidVersion } from "../models/Index.js"
+import { internalError, noParams, noRegion, noValidRegion, noValidVersion } from "../models/Index.js"
 
 async function itemList(req, res, next) {
   try {
@@ -21,7 +21,8 @@ async function itemStats(req, res, next) {
     if (!req.query.version) return noVersion(res);
     if (!await isValidVersion(req.query.version)) return noValidVersion(res);
     return getListStats(res, req.query.version, req.query.region);
-  } catch {
+  } catch (err) {
+    console.log(err.message)
     return internalError(res);
   }
 }

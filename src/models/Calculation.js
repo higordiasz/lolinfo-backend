@@ -1,3 +1,5 @@
+import { getListStatsLocal } from "../api/Item.js";
+
 /*
 {
   id: 'Braum',
@@ -223,12 +225,22 @@
 ]
 */
 class StatsCalculation {
-  constructor(champion, itens, level) {
+  constructor(champion, itens, level, region, version) {
+    this.iniciar(champion, itens, level, region, version);
+  }
+
+  async iniciar(champion, itens, level, region, version) {
     if (!champion) return null;
     if (!itens) return null;
     if (!level) return null;
     if (itens.length <= 0) return null;
     if (!champion.stats) return null;
+    let champStats = champion.stats;
+    let itemsStats = getListStatsLocal(version, region);
+    let keys = Object.keys(itemsStats);
+    console.log(itemsStats);
+    console.log(keys);
+    return null;
   }
 }
 

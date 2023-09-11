@@ -55,6 +55,18 @@ async function getListStats(res, version, region) {
   });
 }
 
+async function getListStatsLocal(version, region) {
+  const items = await fetch(baseUrl(version, region))
+    .then(function (res) {
+      return res.json();
+    })
+    .catch(function () {
+      return
+    });
+  if (!items) return null;
+  return items.basic.stats;
+}
+
 async function checkValidItems(items, version, region) {
   if (!Array.isArray(items)) return false;
   const itemsListAPI = await fetch(baseUrl(version, region))
@@ -94,5 +106,6 @@ export {
   getSingleItem,
   getListStats,
   checkValidItems,
-  getSingleItemInfo
+  getSingleItemInfo,
+  getListStatsLocal
 }
