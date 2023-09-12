@@ -60,7 +60,7 @@ async function getListStatsLocal(version, region) {
     .then(function (res) {
       return res.json();
     })
-    .catch(function () {
+    .catch(function (err) {
       return
     });
   if (!items) return null;

@@ -235,11 +235,31 @@ class StatsCalculation {
     if (!level) return null;
     if (itens.length <= 0) return null;
     if (!champion.stats) return null;
-    let champStats = champion.stats;
-    let itemsStats = getListStatsLocal(version, region);
+    let champStats = {
+      hp: champion.stats.hp + (champion.stats.hpperlevel * (level - 1)),
+      mp: champion.stats.mp + (champion.stats.mpperlevel * (level - 1)),
+      movespeed: champion.stats.movespeed,
+      armor: champion.stats.armor + (champion.stats.armorperlevel * (level - 1)),
+      spellblock: champion.stats.spellblock + (champion.stats.spellblockperlevel * (level - 1)),
+      attackrange: champion.stats.attackrange,
+      hpregen: champion.stats.hpregen + (champion.stats.hpregenperlevel * (level - 1)),
+      mpregen: champion.stats.mpregen + (champion.stats.mpregenperlevel * (level - 1)),
+      crit: champion.stats.crit + (champion.stats.critperlevel * (level - 1)),
+      attackdamage: champion.stats.attackdamage + (champion.stats.attackdamageperlevel * (level - 1)),
+      attackspeed: champion.stats.attackspeed + (champion.stats.attackspeed * ((champion.stats.attackspeedperlevel * (level - 1)) / 100))
+    };
+    console.log(champStats)
+    let itemsStats = await getListStatsLocal(version, region);
     let keys = Object.keys(itemsStats);
-    console.log(itemsStats);
-    console.log(keys);
+    for (let i = 0; i < itens.length; i++) {
+      if (itens[i].stats != null) {
+        let itensKeys = Object.keys(itens[i].stats);
+        for (let j = 0; j < itensKeys.length; j++) {
+          itemsStats[itensKeys[j]] += itens[i].stats[itensKeys[j]];
+        }
+      }
+    }
+    console.log(itemsStats)
     return null;
   }
 }

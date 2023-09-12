@@ -27,7 +27,7 @@ async function getBuildStats(req, res, next) {
     if (info.length > 0)
       itemsInfo.push(info[0])
   }
-  let calculation = new StatsCalculation(champion, itemsInfo, req.params.level);
+  let calculation = new StatsCalculation(champion, itemsInfo, req.params.level, req.query.region, req.query.version);
   return res.status(200).send({
     status: 200,
     message: calculation,
