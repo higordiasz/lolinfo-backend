@@ -1,6 +1,10 @@
 import Express from 'express';
 import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
+import path from 'path';
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+const __dirname = dirname(fileURLToPath(import.meta.url))
 dotenv.config();
 
 const App = Express();
@@ -10,7 +14,6 @@ App.use(bodyParser.urlencoded({
   extended: true
 }));
 
-/*
 // Force HTTPS
 App.use((req, res, next) => {
   if ((req.headers["x-forwarded-proto"] || "").endsWith("http"))
@@ -18,7 +21,7 @@ App.use((req, res, next) => {
   else
     next();
 });
-*/
+
 // ROUTERS
 import Champion from './routers/ChampionRouter.js'
 App.use(`/api/${APIVERSION}/champions/`, Champion)
@@ -34,6 +37,10 @@ App.use(`/api/${APIVERSION}/items/`, Items)
 
 import Build from './routers/BuildRouter.js'
 App.use(`/api/${APIVERSION}/build/`, Build);
+
+App.use((req, res, next) => {
+  res.sendFile('index.html', { root: __dirname + '\\page' })
+});
 
 export {
   App
