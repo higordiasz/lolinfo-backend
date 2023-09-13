@@ -21,9 +21,17 @@ A implementation of [Riot Games](https://developer.riotgames.com/) API.
 
 | Functions  | Status | Description |
 | ------------- | ------------- | ------------- |
-| Hello | ✅  | A simple Hello World |
 |Champ Info| ✅ | Get Champions information by name|
 |Level Info| ✅ | Get Chapion stats per level|
+|Servers| ✅ | Get list of Riot servers|
+|Versions| ✅ | Get list of versions to use in API|
+|Languages| ✅ | Get list of languages that are avaible|
+|Specific Server| ✅ | Get version of API is used by server|
+|Iten List| ✅ | Get list of avaible itens|
+|Iten Stats| ✅ | Get list of avaible stats of itens|
+|Item Info| ✅ | Get stats of specific item|
+|Skin Info| ✅ | Get Chapion skin info|
+|Build| ✅ | Send a json with champion and items to get a state of champion with this build|
 
 Something missing? Make an issue and let us know!
 
