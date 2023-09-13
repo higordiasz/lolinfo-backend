@@ -39,7 +39,7 @@ import Build from './routers/BuildRouter.js'
 App.use(`/api/${APIVERSION}/build/`, Build);
 
 App.use((req, res, next) => {
-  res.sendFile('index.html', { root: __dirname + '\\page' })
+  res.sendFile('index.html', { root: __dirname + '/page' })
 });
 
 export {
