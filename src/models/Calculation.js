@@ -225,8 +225,7 @@ import { getListStatsLocal } from "../api/Item.js";
 ]
 */
 class StatsCalculation {
-  constructor(champion, itens, level, region, version) {
-    this.iniciar(champion, itens, level, region, version);
+  constructor() {
   }
 
   async iniciar(champion, itens, level, region, version) {
@@ -246,9 +245,14 @@ class StatsCalculation {
       mpregen: champion.stats.mpregen + (champion.stats.mpregenperlevel * (level - 1)),
       crit: champion.stats.crit + (champion.stats.critperlevel * (level - 1)),
       attackdamage: champion.stats.attackdamage + (champion.stats.attackdamageperlevel * (level - 1)),
-      attackspeed: champion.stats.attackspeed + (champion.stats.attackspeed * ((champion.stats.attackspeedperlevel * (level - 1)) / 100))
+      attackspeed: champion.stats.attackspeed + (champion.stats.attackspeed * ((champion.stats.attackspeedperlevel * (level - 1)) / 100)),
+      spelldamage: 0,
+      armorpenetration: 0,
+      dodge: 0,
+      critchance: 0,
+      magicpenetration: 0,
+      block: 0
     };
-    console.log(champStats)
     let itemsStats = await getListStatsLocal(version, region);
     let keys = Object.keys(itemsStats);
     for (let i = 0; i < itens.length; i++) {
@@ -258,9 +262,54 @@ class StatsCalculation {
           itemsStats[itensKeys[j]] += itens[i].stats[itensKeys[j]];
         }
       }
-    }
-    console.log(itemsStats)
-    return null;
+    };
+    champStats.hp += itemsStats.FlatHPPoolMod;
+    champStats.hp += itemsStats.rFlatHPModPerLevel * (level - 1);
+    champStats.hp += (champStats.hp * (itemsStats.PercentHPPoolMod));
+    champStats.mp += itemsStats.FlatMPPoolMod
+    champStats.mp += itemsStats.rFlatMPModPerLevel * (level - 1);
+    champStats.mp += (champStats.mp * (itemsStats.PercentMPPoolMod));
+    champStats.hpregen += itemsStats.FlatHPRegenMod;
+    champStats.hpregen += itemsStats.rFlatHPRegenModPerLevel * (level - 1);
+    champStats.hpregen += (champStats.hpregen * (itemsStats.PercentHPRegenMod));
+    champStats.mpregen += itemsStats.FlatMPRegenMod;
+    champStats.mpregen += itemsStats.rFlatMPRegenModPerLevel * (level - 1);
+    champStats.mpregen += (champStats.mpregen * (itemsStats.PercentMPRegenMod))
+    champStats.armor += itemsStats.FlatArmorMod;
+    champStats.armor += itemsStats.rFlatArmorModPerLevel * (level - 1);
+    champStats.armor += (champStats.armor * (itemsStats.PercentArmorMod));
+    champStats.armorpenetration += itemsStats.rFlatArmorPenetrationMod;
+    champStats.armorpenetration += itemsStats.rFlatArmorPenetrationModPerLevel * (level - 1);
+    champStats.armorpenetration += (champStats.armorpenetration * ((itemsStats.rPercentArmorPenetrationModPerLevel) + (itemsStats.rPercentArmorPenetrationMod)));
+    champStats.attackdamage += itemsStats.FlatPhysicalDamageMod;
+    champStats.attackdamage += itemsStats.rFlatPhysicalDamageModPerLevel * (level - 1);
+    champStats.attackdamage += (champStats.attackdamage * (itemsStats.PercentPhysicalDamageMod));
+    champStats.spelldamage += itemsStats.FlatMagicDamageMod;
+    champStats.spelldamage += itemsStats.rFlatMagicDamageModPerLevel * (level - 1);
+    champStats.spelldamage += (champStats.spelldamage * (itemsStats.PercentMagicDamageMod));
+    champStats.movespeed += itemsStats.FlatMovementSpeedMod;
+    champStats.movespeed += itemsStats.rFlatMovementSpeedModPerLevel * (level - 1);
+    champStats.movespeed += (champStats.movespeed * ((itemsStats.PercentMovementSpeedMod) + (itemsStats.rPercentMovementSpeedModPerLevel)));
+    champStats.attackspeed += itemsStats.FlatAttackSpeedMod;
+    champStats.attackspeed += ((champStats.attackspeed * itemsStats.PercentAttackSpeedMod) + (champStats.attackspeed * itemsStats.rPercentAttackSpeedModPerLevel));
+    champStats.dodge += itemsStats.rFlatDodgeMod;
+    champStats.dodge += itemsStats.rFlatDodgeModPerLevel * (level - 1);
+    champStats.dodge += (champStats.dodge * itemsStats.PercentDodgeMod);
+    champStats.critchance += itemsStats.FlatCritChanceMod;
+    champStats.critchance += itemsStats.rFlatCritChanceModPerLevel * (level - 1);
+    champStats.critchance += (champStats.critchance * itemsStats.PercentCritChanceMod);
+    champStats.crit += itemsStats.FlatCritDamageMod;
+    champStats.crit += itemsStats.rFlatCritDamageModPerLevel * (level - 1);
+    champStats.crit += (champStats.crit * itemsStats.PercentCritDamageMod);
+    champStats.block += itemsStats.FlatBlockMod;
+    champStats.block += (champStats.block * itemsStats.PercentBlockMod);
+    champStats.spellblock += itemsStats.FlatSpellBlockMod;
+    champStats.spellblock += itemsStats.rFlatSpellBlockModPerLevel * (level - 1);
+    champStats.spellblock += (champStats.block * itemsStats.PercentSpellBlockMod);
+    champStats.magicpenetration += itemsStats.rFlatMagicPenetrationMod;
+    champStats.magicpenetration += itemsStats.rFlatMagicPenetrationModPerLevel * (level - 1);
+    champStats.magicpenetration += (champStats.magicpenetration * (itemsStats.rPercentMagicPenetrationMod + itemsStats.rPercentMagicPenetrationModPerLevel));
+    return champStats;
   }
 }
 
